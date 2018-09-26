@@ -1,0 +1,6 @@
+version: "2"
+services:
+  rancher_webhook_telegram:
+    build: ./
+    ports:
+      - 5000:5000
