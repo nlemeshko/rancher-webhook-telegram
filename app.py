@@ -14,8 +14,7 @@ TELEGRAM_CHATID = os.environ.get('TELEGRAM_CHATID', None)
 @app.route("/webhook", methods=["POST"])
 def webhook():
     events = request.get_json()
-    print (events)
-    for event in events:
+    for event in events['alerts']:
         telegram_handle(message=event['labels'])
     return jsonify(message="Handling message"), 200
 
