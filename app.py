@@ -14,9 +14,13 @@ TELEGRAM_CHATID = os.environ.get('TELEGRAM_CHATID', None)
 @app.route("/webhook", methods=["POST"])
 def webhook():
     events = request.get_json()
-    for event in events['alerts']:
-        telegram_handle(message=event['labels'])
-    return jsonify(message="Handling message"), 200
+    try:
+       events[0]["labels"]["test_msg"] == "Webhook setting validated"
+       return jsonify(message="Handling message"), 200
+    except:
+        for event in events['alerts']:
+            telegram_handle(message=event['labels'])
+        return jsonify(message="Handling message"), 200
 
 
 
