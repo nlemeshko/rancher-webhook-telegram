@@ -28,9 +28,11 @@ def webhook():
 def telegram_handle(message):
     if TELEGRAM_TOKEN and TELEGRAM_CHATID:
         bot = telegram.Bot(token=TELEGRAM_TOKEN)
+        text = "```{}```".format(message)
+        text = text.replace(", ", "\n")
         try:
             bot.send_message(chat_id=TELEGRAM_CHATID,
-                             text="```{}```".format(message),
+                             text=text,
                              parse_mode=telegram.ParseMode.MARKDOWN,
                              timeout=int(60))
             return True
